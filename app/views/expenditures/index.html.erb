@@ -1,10 +1,47 @@
 <div class="container">
-  <div class="row">
-    <div class="wrapper">
-      <table>
-        <thead></thead>
-        <tbody></tbody>
-      </table>
+  <div class="row center">
+    <h3>Expenditure management</h3>
+  </div>
+  <div>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <td></td>
+          <td>Day</td>
+          <td>Name</td>
+          <td>Money</td>
+        </tr>
+      </thead>
+      <tbody>
+        <% @expenditures.each.with_index(1) do |expenditure, index| %>
+          <tr>
+            <td><%= index %></td>
+            <td><%= expenditure.day %></td>
+            <td><%= expenditure.name %></td>
+            <td><%= expenditure.money %></td>
+          </tr>
+        <% end %>
+        <tr>
+          <td class="center">
+            <b style="vertical-align: middle">New Expenditure</b>
+          </td>
+          <td>
+            <%= date_select :expenditure, :day, {ampm: true},
+              {class: "form-control", style: "display: inline; width: 30%;"} %>
+          </td>
+          <td>
+            <%= text_field :expenditure, :name, class: "form-control" %>
+          </td>
+          <td>
+            <%= number_field :expenditure, :money, class: "form-control" %>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="row">
+      <div class="pull-right">
+        <%= link_to "Update expenditures", "", class: "btn btn-success" %>
+      </div>
     </div>
   </div>
 </div>

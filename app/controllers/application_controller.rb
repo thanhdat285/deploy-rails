@@ -4,4 +4,9 @@ class ApplicationController < ActionController::Base
   def login_required
     redirect_to root_path unless session[:users]
   end
+
+  def current_user
+    return nil if session[:users].nil?
+    @current_user ||= User.find_by(id: session[:users]["id"])
+  end
 end
