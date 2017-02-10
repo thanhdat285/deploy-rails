@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Redhat</title>
+    <title>Frozennn</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -9,6 +9,12 @@
   </head>
 
   <body>
+    <% flash.each do |key, value| %>
+      <p>
+        <b><%= key %></b>
+        <%= value %>
+      </p>
+    <% end %>
     <%= yield %>
   </body>
 </html>
