@@ -2,6 +2,11 @@ class User < ApplicationRecord
   before_save :check_confirmation
   before_save :encrypt_password
 
+  validates :username, presence: true, uniqueness: true
+  validates :password, presence: true, length: {minimum: 6}
+
+  has_many :expenditures, dependent: :destroy
+
   attr_accessor :password_confirmation
 
   def authenticate! pass
