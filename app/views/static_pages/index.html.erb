@@ -1,1 +1,16 @@
-Hello World!!!
+<div class="container">
+  <div class="row">
+    <% if current_user.nil? %>
+      <%= link_to "Sign in", "/users/sign_in" %>
+    <% else %>
+      <%= link_to "Sign out", "/users/sign_out", method: :delete %>
+    <% end %>
+  </div>
+  <div class="row center">
+    <% if current_user.nil? %>
+      Hello World!!!
+    <% else %>
+      <%= "Hello #{current_user.username}" %>
+    <% end %>
+  </div>
+</div>
