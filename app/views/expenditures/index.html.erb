@@ -16,7 +16,7 @@
         <% @expenditures.each.with_index(1) do |expenditure, index| %>
           <tr>
             <td><%= index %></td>
-            <td><%= expenditure.day %></td>
+            <td><%= expenditure.day.strftime("%Y/%m/%d") %></td>
             <td><%= expenditure.name %></td>
             <td><%= expenditure.money %></td>
           </tr>
@@ -27,7 +27,7 @@
           </td>
           <td>
             <%= date_select :expenditure, :day, {ampm: true},
-              {class: "form-control", style: "display: inline; width: 30%;"} %>
+              {class: "form-control inline width-30"} %>
           </td>
           <td>
             <%= text_field :expenditure, :name, class: "form-control" %>
@@ -38,10 +38,32 @@
         </tr>
       </tbody>
     </table>
-    <div class="row">
+    <div>
       <div class="pull-right">
-        <%= link_to "Update expenditures", "", class: "btn btn-success" %>
+        <%= link_to "Create new expenditure", '',
+          method: :post, remote: true, class: "btn btn-success",
+          id: "expenditure-update" %>
       </div>
     </div>
   </div>
 </div>
+
+<script type="text/javascript">
+  $(function() {
+    var data = {
+      'day_1i': $('#expenditure_day_1i').val(), // year
+      'day_2i': $('#expenditure_day_2i').val(), // month
+      'day_3i': $('#expenditure_day_3i').val(), // date
+      'name': $('#expenditure_name').val(),
+      'money': $('#expenditure_money').val()
+    };
+    $('#expenditure-update').attr('href', '/expenditures?'+$.param(data));
+
+    ['day_1i', 'day_2i', 'day_3i', 'name', 'money'].forEach(function(id) {
+      $('#expenditure_' + id).change(function() {
+        data[id] = $(this).val();
+        $('#expenditure-update').attr('href', '/expenditures?'+$.param(data));
+      });
+    });
+  });
+</script>
