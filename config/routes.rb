@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   root "static_pages#index"
 
   resources :users, only: [:index, :new, :create]
-  resources :expenditures
+  resources :expenditures, only: [:index, :create]
 
   namespace :users do
     get "sign_in" => "sessions#new"
