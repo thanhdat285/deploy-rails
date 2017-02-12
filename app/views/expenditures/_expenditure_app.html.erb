@@ -58,6 +58,16 @@
       });
     };
 
+    $scope.modalDelete = function(index) {
+      $scope.modal = {
+        title: 'Delete Expenditure',
+        text: 'You will delete this expenditure. Are you sure?',
+        type: 'Yes/No',
+        index: index
+      };
+      openModal();
+    };
+
     $scope.toJSObject();
     $scope.initDay();
     $scope.years = [2015, 2016, 2017];
@@ -71,5 +81,8 @@
   function removeTextInInput() {
     $('#expenditure_name').val('');
     $('#expenditure_money').val('');
+  }
+  function openModal() {
+    $('#expenditure_modal').modal();
   }
 </script>
