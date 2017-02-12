@@ -2,7 +2,8 @@
   var app = angular.module('frozennn', []);
   app.config([
     "$httpProvider", function($httpProvider) {
-      $httpProvider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token]').attr('content');
+      $httpProvider.defaults.headers.common['X-CSRF-Token']
+        = $('meta[name=csrf-token]').attr('content');
     }
   ]);
   app.controller('expenditure', function($scope, $http) {
