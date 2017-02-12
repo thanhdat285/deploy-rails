@@ -1,0 +1,75 @@
+<script type="text/javascript">
+  var app = angular.module('frozennn', []);
+  app.config([
+    "$httpProvider", function($httpProvider) {
+      $httpProvider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token]').attr('content');
+    }
+  ]);
+  app.controller('expenditure', function($scope, $http) {
+    $scope.toJSObject = function() {
+      $scope.expenditures = [];
+      <% @expenditures.each do |expenditure| %>
+        $scope.expenditures.push({
+          id: <%= expenditure.id %>,
+          name: '<%= expenditure.name %>',
+          money: <%= expenditure.money %>,
+          day: '<%= expenditure.day.strftime("%Y/%m/%d") %>'
+        });
+      <% end %>
+    }
+    $scope.initDay = function() {
+      var d = new Date();
+      $scope.day = {
+        'year': d.getYear() + 1900,
+        'month': d.getMonth() + 1,
+        'date': d.getDate()
+      };
+    };
+    $scope.updateDays = function() {
+      $scope.days = Array.from(
+        {length: number_days($scope.day['year'], $scope.day['month'])},
+        (v, k) => k + 1
+      )
+    };
+    $scope.create = function() {
+      $http({
+        url: "/expenditures",
+        method: "POST",
+        data: {
+          day: $scope.day,
+          name: $scope.name,
+          money: $scope.money
+        }
+      }).then(function success(response) {
+        $scope.expenditures.push(response.data);
+        removeTextInInput();
+      }, function error(response) {
+        $scope.error = response.responseText.message;
+      });
+    };
+    $scope.delete = function(index) {
+      $http({
+        url: "/expenditures/" + $scope.expenditures[index].id,
+        method: "DELETE"
+      }).then(function success(response) {
+        $scope.expenditures.splice(index, 1);
+      }, function error(response) {
+        $scope.error = response.responseText.message;
+      });
+    };
+
+    $scope.toJSObject();
+    $scope.initDay();
+    $scope.years = [2015, 2016, 2017];
+    $scope.months = Array.from({length: 12}, (v, k) => k + 1);
+    $scope.updateDays();
+  });
+
+  function number_days(year, month) {
+    return new Date(year, month, 0).getDate();
+  }
+  function removeTextInInput() {
+    $('#expenditure_name').val('');
+    $('#expenditure_money').val('');
+  }
+</script>

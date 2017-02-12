@@ -15,8 +15,9 @@ gem 'uglifier', '>= 1.3.0'
 gem 'jquery-rails'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
-gem 'angularjs-rails', '~> 1.5', '>= 1.5.6'
 gem 'config', '~> 1.0'
+
+gem 'font-awesome-rails', '~> 4.7', '>= 4.7.0.1'
 
 group :development, :test do
   gem 'byebug', platform: :mri
