@@ -1,22 +1,42 @@
 class ExpendituresController < ApplicationController
   before_action :login_required
-  before_action :enough_params, only: :update_all
+  before_action :enough_params, only: :create
 
   def index
     @expenditures = current_user.expenditures.order(:day)
   end
 
   def create
-    day = [params["day_1i"], params["day_2i"], params["day_3i"]].join("/")
-    @expenditure = current_user.expenditures.new(
-      day: day, name: params["name"], money: params["money"]
-    )
-    if @expenditure.save
-      flash[:success] = "Create new expenditure success"
-    else
-      flash[:error] = @expenditure.errors
+    begin
+      day = params["day"]
+      day = [day["year"], day["month"], day["date"]].join("/")
+      @expenditure = current_user.expenditures.new(
+        day: day,
+        name: params["name"],
+        money: params["money"]
+      )
+      if @expenditure.save
+        render json: {
+          id: @expenditure.id,
+          name: @expenditure.name,
+          money: @expenditure.money,
+          day: @expenditure.day.strftime("%Y/%m/%d")
+        }, status: :ok
+      else
+        render json: {message: @expenditure.errors}, status: :bad_request
+      end
+    rescue
+      render json: {}, status: :bad_request
     end
-    redirect_to expenditures_path
+  end
+
+  def destroy
+    @expenditure = Expenditure.find_by(id: params[:id])
+    if @expenditure.destroy
+      render json: {}, status: :ok
+    else
+      render json: {message: @expenditure.errors}, status: :bad_request
+    end
   end
 
   private
@@ -25,8 +45,11 @@ class ExpendituresController < ApplicationController
   end
 
   def enough_params
-    if ["day_1i", "day_2i", "day_3i", "name", "money"].any? {|k| params[k].nil?}
-      redirect_to root_path
+    if ["day", "name", "money"].any? {|k| params[k].nil?}
+      return render json: {message: "Not enough params"}, status: :bad_request
+    end
+    if ["year", "month", "date"].any? {|k| params["day"][k].nil?}
+      return render json: {message: "Not enough params"}, status: :bad_request
     end
   end
 end
