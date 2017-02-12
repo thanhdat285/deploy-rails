@@ -1,16 +1,15 @@
 <div class="container">
-  <div class="row">
-    <% if current_user.nil? %>
-      <%= link_to "Sign in", "/users/sign_in" %>
-    <% else %>
-      <%= link_to "Sign out", "/users/sign_out", method: :delete %>
-    <% end %>
-  </div>
+  <% unless current_user.nil? %>
+    <div class="sidebar-container">
+      <%= link_to "Expenditure Management", expenditures_path, target: "_self" %>
+      <a href="">...</a>
+    </div>
+  <% end %>
   <div class="row center">
     <% if current_user.nil? %>
-      Hello World!!!
+      <h3>Hello World!!!</h3>
     <% else %>
-      <%= "Hello #{current_user.username}" %>
+      <h3><%= "Hello #{current_user.username}" %></h3>
     <% end %>
   </div>
 </div>

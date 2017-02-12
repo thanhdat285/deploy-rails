@@ -1,0 +1,20 @@
+<nav class="navbar navbar-default">
+  <div class="container-fluid container">
+    <div class="navbar-header">
+    </div>
+    <ul class="nav navbar-nav">
+      <li>
+        <%= link_to "Home", root_path %>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li>
+        <% if current_user.nil? %>
+          <%= link_to "Sign in", users_sign_in_path %>
+        <% else %>
+          <%= link_to "Sign out", users_sign_out_path, method: :delete %>
+        <% end %>
+      </li>
+    </ul>
+  </div>
+</nav>

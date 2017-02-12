@@ -38,3 +38,28 @@
 .inline {
   display: inline;
 }
+.no-margin-bottom {
+  margin-bottom: 0 !important;
+}
+
+.sidebar-container {
+  height: 100%;
+  width: 20%;
+  z-index: 1;
+  float: left;
+  background-color: #f7f7f7;
+  overflow-x: hidden;
+  border-radius: 2px;
+  box-shadow: 0px 1px 1px #888888;
+}
+.sidebar-container a {
+  padding: 8px 8px 8px 20px;
+  text-decoration: none;
+  font-size: 17px;
+  display: block;
+  color: #808080;
+  border: 1px solid #ddd;
+}
+.sidebar-container a:hover {
+  background: #eee;
+}
