@@ -1,6 +1,9 @@
-<div class="container">
+<div class="container" ng-controller="expenditure" ng-cloak>
   <div class="row center">
     <h3>Expenditure management</h3>
+  </div>
+  <div class="row">
+    {{error}}
   </div>
   <div>
     <table class="table table-bordered">
@@ -10,60 +13,58 @@
           <td>Day</td>
           <td>Name</td>
           <td>Money</td>
+          <td></td>
         </tr>
       </thead>
       <tbody>
-        <% @expenditures.each.with_index(1) do |expenditure, index| %>
-          <tr>
-            <td><%= index %></td>
-            <td><%= expenditure.day.strftime("%Y/%m/%d") %></td>
-            <td><%= expenditure.name %></td>
-            <td><%= expenditure.money %></td>
-          </tr>
-        <% end %>
+        <tr data-id="{{expenditure.id}}"
+          ng-repeat="expenditure in expenditures | orderBy: 'day'">
+          <td>{{$index + 1}}</td>
+          <td>{{expenditure.day}}</td>
+          <td>{{expenditure.name}}</td>
+          <td>{{expenditure.money}}</td>
+          <td>
+            <a href="" id="expenditure_delete" ng-click="delete($index)">
+              <i class="fa fa-times" aria-hidden="true"></i>
+            </a>
+          </td>
+        </tr>
+
         <tr>
           <td class="center">
             <b style="vertical-align: middle">New Expenditure</b>
           </td>
           <td>
-            <%= date_select :expenditure, :day, {ampm: true},
-              {class: "form-control inline width-30"} %>
+            <select class="form-control inline width-30" id="expenditure_year"
+              ng-model="day['year']" ng-options="y for y in years"
+              ng-change="updateDays()">
+            </select>
+            <select class="form-control inline width-30" id="expenditure_month"
+              ng-model="day['month']" ng-options="m for m in months"
+              ng-change="updateDays()">
+            </select>
+            <select class="form-control inline width-30" id="expenditure_day"
+              ng-model="day['date']" ng-options="d for d in days"
+              ng-change="updateDays()">
+            </select>
           </td>
           <td>
-            <%= text_field :expenditure, :name, class: "form-control" %>
+            <input type="text" class="form-control" id="expenditure_name"
+              ng-model="name">
           </td>
           <td>
-            <%= number_field :expenditure, :money, class: "form-control" %>
+            <input type="number" class="form-control" id="expenditure_money"
+              ng-model="money">
           </td>
         </tr>
       </tbody>
     </table>
     <div>
-      <div class="pull-right">
-        <%= link_to "Create new expenditure", '',
-          method: :post, remote: true, class: "btn btn-success",
-          id: "expenditure-update" %>
+      <div class="pull-right btn btn-success" ng-click="create()">
+        Create new Expenditure
       </div>
     </div>
   </div>
 </div>
 
-<script type="text/javascript">
-  $(function() {
-    var data = {
-      'day_1i': $('#expenditure_day_1i').val(), // year
-      'day_2i': $('#expenditure_day_2i').val(), // month
-      'day_3i': $('#expenditure_day_3i').val(), // date
-      'name': $('#expenditure_name').val(),
-      'money': $('#expenditure_money').val()
-    };
-    $('#expenditure-update').attr('href', '/expenditures?'+$.param(data));
-
-    ['day_1i', 'day_2i', 'day_3i', 'name', 'money'].forEach(function(id) {
-      $('#expenditure_' + id).change(function() {
-        data[id] = $(this).val();
-        $('#expenditure-update').attr('href', '/expenditures?'+$.param(data));
-      });
-    });
-  });
-</script>
+<%= render "expenditure_app" %>
