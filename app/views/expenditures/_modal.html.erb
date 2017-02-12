@@ -1,0 +1,24 @@
+<div class="modal fade" id="expenditure_modal" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close"></button>
+        <h4 class="modal-title">{{modal.title}}</h4>
+      </div>
+      <div class="modal-body">
+        <p>
+         {{modal.text}}
+        </p>
+      </div>
+      <div class="modal-footer" ng-if="modal.type == 'Yes/No'">
+        <button type="button" class="btn btn-primary" data-dismiss="modal"
+          ng-click="delete(modal.index)">
+          Yes
+        </button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">
+          No
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
