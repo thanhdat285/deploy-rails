@@ -1,0 +1,7 @@
+<% if Rails.env == "development" %>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js">
+  </script>
+<% elsif Rails.env == "production" %>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js">
+  </script>
+<% end %>
