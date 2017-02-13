@@ -33,13 +33,14 @@
       )
     };
     $scope.create = function() {
+      var type = $scope.type == 'Lost' ? -1 : 1
       $http({
         url: "/financials",
         method: "POST",
         data: {
           day: $scope.day,
           name: $scope.name,
-          money: $scope.money
+          money: type * $scope.money
         }
       }).then(function success(response) {
         $scope.financials.push(response.data);
@@ -68,12 +69,19 @@
       };
       openModal();
     };
+    $scope.sumFinancials = function() {
+      return $scope.financials.map(function(financial) {
+        return parseInt(financial.money);
+      }).reduce((a, b) => (a + b), 0);
+    }
 
     $scope.toJSObject();
     $scope.initDay();
     $scope.years = [2015, 2016, 2017];
     $scope.months = Array.from({length: 12}, (v, k) => k + 1);
     $scope.updateDays();
+    $scope.types = ['Lost', 'Receive'];
+    $scope.type = $scope.types[0];
   });
 
   function number_days(year, month) {

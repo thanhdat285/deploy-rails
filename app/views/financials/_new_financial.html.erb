@@ -1,0 +1,36 @@
+<tr>
+  <td class="center">
+    <b style="vertical-align: middle">New financial</b>
+  </td>
+  <td>
+    <select class="form-control inline width-30" id="financial_year"
+      ng-model="day['year']" ng-options="y for y in years"
+      ng-change="updateDays()">
+    </select>
+    <select class="form-control inline width-30" id="financial_month"
+      ng-model="day['month']" ng-options="m for m in months"
+      ng-change="updateDays()">
+    </select>
+    <select class="form-control inline width-30" id="financial_day"
+      ng-model="day['date']" ng-options="d for d in days"
+      ng-change="updateDays()">
+    </select>
+  </td>
+  <td>
+    <input type="text" class="form-control" id="financial_name"
+      ng-model="name">
+  </td>
+  <td>
+    <select class="form-control inline width-30" ng-model="type"
+      ng-options="t for t in types">
+    </select>
+    <div class="form-group inline width-70 align-right pull-right">
+      <div class="inline width-20 font-20" >
+        <span ng-if="type == 'Lost'" >-</span>
+        <span style="vertical-align: middle;" ng-if="type == 'Receive'">+</span>
+      </div>
+      <input type="number" class="form-control inline width-80"
+        id="financial_money" ng-model="money">
+    </div>
+  </td>
+</tr>
