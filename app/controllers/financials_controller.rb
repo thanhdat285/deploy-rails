@@ -31,7 +31,7 @@ class FinancialsController < ApplicationController
   end
 
   def destroy
-    @financial = financial.find_by(id: params[:id])
+    @financial = Financial.find_by(id: params[:id])
     if @financial.destroy
       render json: {}, status: :ok
     else

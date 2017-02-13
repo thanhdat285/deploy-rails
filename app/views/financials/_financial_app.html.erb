@@ -49,23 +49,23 @@
         $scope.error = response.responseText.message;
       });
     };
-    $scope.delete = function(index) {
+    $scope.delete = function(id) {
       $http({
-        url: "/financials/" + $scope.financials[index].id,
+        url: "/financials/" + id,
         method: "DELETE"
       }).then(function success(response) {
-        $scope.financials.splice(index, 1);
+        $scope.deleteElement(id);
       }, function error(response) {
         $scope.error = response.responseText.message;
       });
     };
 
-    $scope.modalDelete = function(index) {
+    $scope.modalDelete = function(id) {
       $scope.modal = {
         title: 'Delete financial',
         text: 'You will delete this financial. Are you sure?',
         type: 'Yes/No',
-        index: index
+        id: id
       };
       openModal();
     };
@@ -73,7 +73,14 @@
       return $scope.financials.map(function(financial) {
         return parseInt(financial.money);
       }).reduce((a, b) => (a + b), 0);
-    }
+    };
+    $scope.deleteElement = function(id) {
+      for(var i = 0; i < $scope.financials.length; i++) {
+        if(parseInt($scope.financials[i].id) == parseInt(id)) {
+          $scope.financials.splice(i, 1);
+        }
+      }
+    };
 
     $scope.toJSObject();
     $scope.initDay();
