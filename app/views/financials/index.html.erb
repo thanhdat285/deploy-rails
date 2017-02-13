@@ -1,4 +1,4 @@
-<div class="container" ng-controller="financial">
+<div class="container" ng-controller="financial" ng-cloak>
   <div class="row center">
     <h3>Financial management</h3>
   </div>
@@ -17,47 +17,9 @@
         </tr>
       </thead>
       <tbody>
-        <tr data-id="{{financial.id}}"
-          ng-repeat="financial in financials | orderBy: 'day'">
-          <td>{{$index + 1}}</td>
-          <td>{{financial.day}}</td>
-          <td>{{financial.name}}</td>
-          <td>{{financial.money}}</td>
-          <td>
-            <a href="" data-remote="true" ng-click="modalDelete($index)">
-              <i class="fa fa-times" aria-hidden="true"></i>
-            </a>
-          </td>
-
-        </tr>
-
-        <tr>
-          <td class="center">
-            <b style="vertical-align: middle">New financial</b>
-          </td>
-          <td>
-            <select class="form-control inline width-30" id="financial_year"
-              ng-model="day['year']" ng-options="y for y in years"
-              ng-change="updateDays()">
-            </select>
-            <select class="form-control inline width-30" id="financial_month"
-              ng-model="day['month']" ng-options="m for m in months"
-              ng-change="updateDays()">
-            </select>
-            <select class="form-control inline width-30" id="financial_day"
-              ng-model="day['date']" ng-options="d for d in days"
-              ng-change="updateDays()">
-            </select>
-          </td>
-          <td>
-            <input type="text" class="form-control" id="financial_name"
-              ng-model="name">
-          </td>
-          <td>
-            <input type="number" class="form-control" id="financial_money"
-              ng-model="money">
-          </td>
-        </tr>
+        <%= render "financials" %>
+        <%= render "sum_financials" %>
+        <%= render "new_financial" %>
       </tbody>
     </table>
     <div>

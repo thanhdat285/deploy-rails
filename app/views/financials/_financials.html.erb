@@ -1,0 +1,12 @@
+<tr data-id="{{financial.id}}"
+  ng-repeat="financial in financials | orderBy: 'day'">
+  <td>{{$index + 1}}</td>
+  <td>{{financial.day}}</td>
+  <td>{{financial.name}}</td>
+  <td>{{financial.money}}</td>
+  <td>
+    <a href="" data-remote="true" ng-click="modalDelete($index)">
+      <i class="fa fa-times" aria-hidden="true"></i>
+    </a>
+  </td>
+</tr>
