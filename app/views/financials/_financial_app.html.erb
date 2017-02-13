@@ -6,15 +6,15 @@
         = $('meta[name=csrf-token]').attr('content');
     }
   ]);
-  app.controller('expenditure', function($scope, $http) {
+  app.controller('financial', function($scope, $http) {
     $scope.toJSObject = function() {
-      $scope.expenditures = [];
-      <% @expenditures.each do |expenditure| %>
-        $scope.expenditures.push({
-          id: <%= expenditure.id %>,
-          name: '<%= expenditure.name %>',
-          money: <%= expenditure.money %>,
-          day: '<%= expenditure.day.strftime("%Y/%m/%d") %>'
+      $scope.financials = [];
+      <% @financials.each do |financial| %>
+        $scope.financials.push({
+          id: <%= financial.id %>,
+          name: '<%= financial.name %>',
+          money: <%= financial.money %>,
+          day: '<%= financial.day.strftime("%Y/%m/%d") %>'
         });
       <% end %>
     }
@@ -33,16 +33,17 @@
       )
     };
     $scope.create = function() {
+      var type = $scope.type == 'Lost' ? -1 : 1
       $http({
-        url: "/expenditures",
+        url: "/financials",
         method: "POST",
         data: {
           day: $scope.day,
           name: $scope.name,
-          money: $scope.money
+          money: type * $scope.money
         }
       }).then(function success(response) {
-        $scope.expenditures.push(response.data);
+        $scope.financials.push(response.data);
         removeTextInInput();
       }, function error(response) {
         $scope.error = response.responseText.message;
@@ -50,10 +51,10 @@
     };
     $scope.delete = function(index) {
       $http({
-        url: "/expenditures/" + $scope.expenditures[index].id,
+        url: "/financials/" + $scope.financials[index].id,
         method: "DELETE"
       }).then(function success(response) {
-        $scope.expenditures.splice(index, 1);
+        $scope.financials.splice(index, 1);
       }, function error(response) {
         $scope.error = response.responseText.message;
       });
@@ -61,29 +62,36 @@
 
     $scope.modalDelete = function(index) {
       $scope.modal = {
-        title: 'Delete Expenditure',
-        text: 'You will delete this expenditure. Are you sure?',
+        title: 'Delete financial',
+        text: 'You will delete this financial. Are you sure?',
         type: 'Yes/No',
         index: index
       };
       openModal();
     };
+    $scope.sumFinancials = function() {
+      return $scope.financials.map(function(financial) {
+        return parseInt(financial.money);
+      }).reduce((a, b) => (a + b), 0);
+    }
 
     $scope.toJSObject();
     $scope.initDay();
     $scope.years = [2015, 2016, 2017];
     $scope.months = Array.from({length: 12}, (v, k) => k + 1);
     $scope.updateDays();
+    $scope.types = ['Lost', 'Receive'];
+    $scope.type = $scope.types[0];
   });
 
   function number_days(year, month) {
     return new Date(year, month, 0).getDate();
   }
   function removeTextInInput() {
-    $('#expenditure_name').val('');
-    $('#expenditure_money').val('');
+    $('#financial_name').val('');
+    $('#financial_money').val('');
   }
   function openModal() {
-    $('#expenditure_modal').modal();
+    $('#financial_modal').modal();
   }
 </script>

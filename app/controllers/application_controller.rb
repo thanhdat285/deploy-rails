@@ -9,4 +9,10 @@ class ApplicationController < ActionController::Base
     return nil if session[:users].nil?
     @current_user ||= User.find_by(id: session[:users]["id"])
   end
+
+  def sign_in user
+    session[:users] = {
+      "id" => user.id
+    }
+  end
 end
