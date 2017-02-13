@@ -49,6 +49,26 @@
         $scope.error = response.responseText.message;
       });
     };
+    $scope.update = function(financial) {
+      $http({
+        url: "/financials/" + financial.id,
+        method: "PUT",
+        data: {
+          day: {
+            year: financial.day.getYear() + 1900,
+            month: financial.day.getMonth() + 1,
+            date: financial.day.getDate()
+          },
+          name: financial.name,
+          money: financial.money
+        }
+      }).then(function success(response) {
+        console.log(response);
+        $scope.updateElement(response.data);
+      }, function error(response) {
+        $scope.error = response.responseText.message;
+      });
+    }
     $scope.delete = function(id) {
       $http({
         url: "/financials/" + id,
@@ -56,17 +76,29 @@
       }).then(function success(response) {
         $scope.deleteElement(id);
       }, function error(response) {
+        console.log(response);
         $scope.error = response.responseText.message;
       });
     };
 
+    $scope.modalEdit = function(financial) {
+      $scope.modal = {
+        type: 'edit',
+        financial: {
+          id: financial.id,
+          name: financial.name,
+          money: financial.money,
+          day: new Date(financial.day.split("/").join("-"))
+        }
+      };
+      openModal();
+    }
     $scope.modalDelete = function(id) {
       $scope.modal = {
-        title: 'Delete financial',
-        text: 'You will delete this financial. Are you sure?',
-        type: 'Yes/No',
+        type: 'delete',
         id: id
       };
+      console.log($scope.modal);
       openModal();
     };
     $scope.sumFinancials = function() {
@@ -74,10 +106,19 @@
         return parseInt(financial.money);
       }).reduce((a, b) => (a + b), 0);
     };
+    $scope.updateElement = function(financial) {
+      for(var i = 0; i < $scope.financials.length; i++) {
+        if(parseInt($scope.financials[i].id) == parseInt(financial.id)) {
+          $scope.financials[i] = financial;
+          break;
+        }
+      }
+    };
     $scope.deleteElement = function(id) {
       for(var i = 0; i < $scope.financials.length; i++) {
         if(parseInt($scope.financials[i].id) == parseInt(id)) {
           $scope.financials.splice(i, 1);
+          break;
         }
       }
     };
