@@ -63,7 +63,6 @@
           money: financial.money
         }
       }).then(function success(response) {
-        console.log(response);
         $scope.updateElement(response.data);
       }, function error(response) {
         $scope.error = response.responseText.message;
@@ -76,7 +75,6 @@
       }).then(function success(response) {
         $scope.deleteElement(id);
       }, function error(response) {
-        console.log(response);
         $scope.error = response.responseText.message;
       });
     };
@@ -98,7 +96,6 @@
         type: 'delete',
         id: id
       };
-      console.log($scope.modal);
       openModal();
     };
     $scope.sumFinancials = function() {
