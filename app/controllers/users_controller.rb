@@ -10,6 +10,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       flash[:success] = "Create user successfully"
+      sign_in @user
     else
       flash[:error] = "Can't create new user"
     end

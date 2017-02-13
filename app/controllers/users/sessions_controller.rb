@@ -6,10 +6,12 @@ class Users::SessionsController < ApplicationController
     username = params[:sign_in][:username]
     password = params[:sign_in][:password]
     @user = User.find_by(username: username)
+    if @user.nil?
+      flash[:error] = "Account does not exist"
+      return redirect_to users_sign_in_path
+    end
     if @user.authenticate!(password)
-      session[:users] = {
-        "id" => @user.id
-      }
+      sign_in @user
       flash[:success] = "Signed in"
     else
       flash[:error] = "Invalid username or password"
