@@ -69,3 +69,33 @@
 .sidebar-container a:hover {
   background: #eee;
 }
+
+.flash {
+  position: fixed;
+  left: 0;
+  top: 6%;
+  right: 0;
+  text-align: center;
+  opacity: 0;
+  animation-name: flash_fade;
+  animation-duration: 5s;
+}
+.flash_content {
+  width: 200px;
+  margin: auto;
+  border: 1px solid #ddd;
+  background-color: #eff1ff;
+  padding: 10px;
+  border-radius: 4px;
+  box-shadow: 1px 1px 2px 0px #d3deea;
+  color: #000;
+  font-size: 16px;
+
+}
+@keyframes flash_fade {
+  0% {opacity: 0;}
+  25% {opacity: 0.75}
+  50% {opacity: 1.0;}
+  75% {opacity: 0.75;}
+  100% {opacity: 0;}
+}

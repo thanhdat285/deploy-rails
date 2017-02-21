@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   resources :users, only: [:index, :new, :create]
   resources :financials, except: [:new, :edit]
+  resources :time_managers
 
   namespace :users do
     get "sign_in" => "sessions#new"
