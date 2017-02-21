@@ -1,0 +1,11 @@
+<% unless flash.empty? %>
+  <div class="flash">
+    <div class="flash_content">
+      <% flash.each do |key, value| %>
+        <p>
+          <%= value %>
+        </p>
+      <% end %>
+    </div>
+  </div>
+<% end %>

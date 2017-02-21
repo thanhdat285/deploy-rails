@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170213054313) do
+ActiveRecord::Schema.define(version: 20170221135945) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,17 @@ ActiveRecord::Schema.define(version: 20170213054313) do
     t.index ["user_id"], name: "index_financials_on_user_id", using: :btree
   end
 
+  create_table "time_managers", force: :cascade do |t|
+    t.datetime "from"
+    t.datetime "to"
+    t.string   "name"
+    t.integer  "status",     default: 0
+    t.integer  "user_id"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.index ["user_id"], name: "index_time_managers_on_user_id", using: :btree
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "username"
     t.string   "password"
@@ -31,4 +42,5 @@ ActiveRecord::Schema.define(version: 20170213054313) do
   end
 
   add_foreign_key "financials", "users"
+  add_foreign_key "time_managers", "users"
 end

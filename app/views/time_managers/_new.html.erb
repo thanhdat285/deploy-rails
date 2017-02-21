@@ -1,0 +1,38 @@
+<div class="modal fade" id="time_modal_new" role="dialog">
+  <div class="modal-dialog">
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close"></button>
+        <h4 class="modal-title">New work {{modal.from.getTimezoneOffset();}}</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-6">
+            <span>Name</span>
+            <input type="text" class="form-control" ng-model="modal.name">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <span>From</span>
+            <input type="datetime-local" class="form-control" ng-model="modal.from">
+          </div>
+          <div class="col-md-6">
+            <span>To</span>
+            <input type="datetime-local" class="form-control" ng-model="modal.to">
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal"
+          ng-click="create()">
+          Create
+        </button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
