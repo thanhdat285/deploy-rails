@@ -1,0 +1,52 @@
+<script type="text/javascript">
+  var app = angular.module('frozennn', []);
+  app.config([
+    "$httpProvider", function($httpProvider) {
+      $httpProvider.defaults.headers.common['X-CSRF-Token']
+        = $('meta[name=csrf-token]').attr('content');
+    }
+  ]);
+  app.controller('time_managers', function($scope, $http) {
+    $scope.convertToJS = function() {
+      <% @time_managers.each do |time_manager| %>
+        $scope.time_managers.push({
+          name: '<%= time_manager.name %>',
+          from: '<%= time_manager.from.strftime("%H:%m %d/%m/%Y") %>',
+          to: '<%= time_manager.to.strftime("%H:%m %d/%m/%Y") %>',
+          status: '<%= time_manager.status %>'
+        });
+      <% end %>
+    };
+    $scope.modal_new = function() {
+      var current = new Date();
+      $scope.modal = {
+        type: 'new',
+        from: new Date(),
+        to: new Date()
+      };
+      $('#time_modal_new').modal();
+    };
+    $scope.create = function() {
+      var from = $scope.modal.from;
+      from.setHours(from.getHours() - from.getTimezoneOffset() / 60);
+      var to = $scope.modal.to;
+      to.setHours(to.getHours() - to.getTimezoneOffset() / 60);
+      $http({
+        url: "/time_managers",
+        method: "POST",
+        data: {
+          name: $scope.modal.name,
+          from: from,
+          to: to
+        }
+      }).then(function success(response) {
+        $scope.time_managers.push(response.data);
+      }, function error(response) {
+        $scope.error = response.data.error;
+      })
+    };
+
+    $scope.time_managers = [];
+    $scope.convertToJS();
+  });
+</script>

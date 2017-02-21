@@ -1,0 +1,52 @@
+<div class="container" ng-controller="time_managers" ng-cloak>
+  <div class="row center">
+    <h3>Time Management</h3>
+  </div>
+  <div class="row">
+    {{error}}
+  </div>
+  <div>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th rowspan="2"></th>
+          <th colspan="4">Work</th>
+        </tr>
+        <tr>
+          <th>Name</th>
+          <th>From</th>
+          <th>To</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="time in time_managers">
+          <td>{{$index + 1}}</td>
+          <td>
+            {{time.name}}
+          </td>
+          <td>
+            {{time.from}}
+          </td>
+          <td>
+            {{time.to}}
+          </td>
+          <td>
+            {{time.status}}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="row">
+    <div class="col-md-3 pull-right">
+      <div class="btn btn-success" ng-click="modal_new()">
+        New Work
+      </div>
+    </div>
+  </div>
+  <%= render "new" %>
+</div>
+
+<%= render "time_managers_app" %>

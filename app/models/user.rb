@@ -6,6 +6,7 @@ class User < ApplicationRecord
   validates :password, presence: true, length: {minimum: 6}
 
   has_many :financials, dependent: :destroy
+  has_many :time_managers, dependent: :destroy
 
   attr_accessor :password_confirmation
 
