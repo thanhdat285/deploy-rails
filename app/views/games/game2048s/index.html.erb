@@ -1,0 +1,67 @@
+<div class="container text-center">
+  <div class="score">
+    <div>Score: </div>
+    <div id="score">0</div>
+  </div>
+  <div id="box_game">
+    <div class="cell cell-2" style="display: none;"></div>
+    <div class="cell cell-4" style="display: none;"></div>
+    <div class="cell cell-8" style="display: none;"></div>
+    <div class="cell cell-16" style="display: none;"></div>
+    <div class="cell cell-32" style="display: none;"></div>
+    <div class="cell cell-64" style="display: none;"></div>
+    <div class="cell cell-128" style="display: none;"></div>
+    <div class="cell cell-256" style="display: none;"></div>
+    <div class="cell cell-512" style="display: none;"></div>
+    <div class="cell cell-1024" style="display: none;"></div>
+    <div class="cell cell-2048" style="display: none;"></div>
+    <div class="cell cell-4096" style="display: none;"></div>
+    <div class="cell cell-8192" style="display: none;"></div>
+    <div class="cell cell-16384" style="display: none;"></div>
+    <div class="cell cell-32768" style="display: none;"></div>
+    <div class="cell cell-65536" style="display: none;"></div>
+
+    <div class="cell" data-position="0-0">
+    </div>
+    <div class="cell" data-position="0-1">
+    </div>
+    <div class="cell" data-position="0-2">
+    </div>
+    <div class="cell" data-position="0-3">
+    </div>
+
+    <div class="cell" data-position="1-0">
+    </div>
+    <div class="cell" data-position="1-1">
+    </div>
+    <div class="cell" data-position="1-2">
+    </div>
+    <div class="cell" data-position="1-3">
+    </div>
+
+    <div class="cell" data-position="2-0">
+    </div>
+    <div class="cell" data-position="2-1">
+    </div>
+    <div class="cell" data-position="2-2">
+    </div>
+    <div class="cell" data-position="2-3">
+    </div>
+
+    <div class="cell" data-position="3-0">
+    </div>
+    <div class="cell" data-position="3-1">
+    </div>
+    <div class="cell" data-position="3-2">
+    </div>
+    <div class="cell" data-position="3-3">
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $(function () {
+    game = new Game2048s();
+    game.start();
+  })
+</script>

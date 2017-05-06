@@ -1,0 +1,111 @@
+#box_game {
+  width: 396px;
+  height: 396px;
+  border: 1px solid #aaa;
+  overflow: hidden;
+  margin: auto;
+}
+
+.cell {
+  width: 100px;
+  height: 100px;
+  border: 1px solid #ddd;
+  display: inline-block;
+  margin: -3px;
+}
+
+.cell-appear {
+  background-image: url("/games/game2048s/2.png");
+  background-repeat: no-repeat;
+  background-size: 2px 2px;
+  background-position: center;
+}
+
+.cell-2 {
+  background-image: url("/games/game2048s/2.png");
+  background-size: 98px 98px;
+  background-repeat: no-repeat;
+}
+.cell-4 {
+  background-image: url("/games/game2048s/4.png");
+  background-size: 98px 98px;
+  background-repeat: no-repeat;
+}
+.cell-8 {
+  background-image: url("/games/game2048s/8.png");
+  background-size: 98px 98px;
+  background-repeat: no-repeat;
+}
+.cell-16 {
+  background-image: url("/games/game2048s/16.png");
+  background-size: 98px 98px;
+  background-repeat: no-repeat;
+}
+.cell-32 {
+  background-image: url("/games/game2048s/32.png");
+  background-size: 98px 98px;
+  background-repeat: no-repeat;
+}
+.cell-64 {
+  background-image: url("/games/game2048s/64.png");
+  background-size: 98px 98px;
+  background-repeat: no-repeat;
+}
+.cell-128 {
+  background-image: url("/games/game2048s/128.png");
+  background-size: 98px 98px;
+  background-repeat: no-repeat;
+}
+.cell-256 {
+  background-image: url("/games/game2048s/256.png");
+  background-size: 98px 98px;
+  background-repeat: no-repeat;
+}
+.cell-512 {
+  background-image: url("/games/game2048s/512.png");
+  background-size: 98px 98px;
+  background-repeat: no-repeat;
+}
+.cell-1024 {
+  background-image: url("/games/game2048s/1024.png");
+  background-size: 98px 98px;
+  background-repeat: no-repeat;
+}
+.cell-2048 {
+  background-image: url("/games/game2048s/2048.png");
+  background-size: 98px 98px;
+  background-repeat: no-repeat;
+}
+.cell-4096 {
+  background-image: url("/games/game2048s/2048.png");
+  background-size: 98px 98px;
+  background-repeat: no-repeat;
+}
+.cell-8192 {
+  background-image: url("/games/game2048s/2048.png");
+  background-size: 98px 98px;
+  background-repeat: no-repeat;
+}
+.cell-16384 {
+  background-image: url("/games/game2048s/2048.png");
+  background-size: 98px 98px;
+  background-repeat: no-repeat;
+}
+.cell-32768 {
+  background-image: url("/games/game2048s/2048.png");
+  background-size: 98px 98px;
+  background-repeat: no-repeat;
+}
+.cell-65536 {
+  background-image: url("/games/game2048s/2048.png");
+  background-size: 98px 98px;
+  background-repeat: no-repeat;
+}
+
+.score {
+  font-size: 28px;
+  margin-bottom: 20px;
+  div {
+    display: inline-block;
+  }
+}
